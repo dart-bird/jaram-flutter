@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
         beforeHeroFontSize: 50.0,
       ),
       title: 'JARAM',
-      logo: 'image/ICT-Jaram.png',
+      logo: 'assets/images/Jaram.png',
       onLogin: _authUser,
       onSignup: _authUser,
       onRecoverPassword: _recoverPassword,
