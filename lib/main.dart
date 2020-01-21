@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'loginPage.dart';
 void main() => runApp(JaramApp());
 
@@ -50,30 +51,10 @@ class _JaramPageState extends State<JaramPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        //padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         child: SafeArea(
           child: LoginScreen(),
-          // child: Center(
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: <Widget>[
-          //       Image(
-          //         height: 150,
-          //         image: AssetImage('image/ICT-Jaram.png'),
-          //       ),
-
-          //       buildButton(
-          //           buttonTitle: '로그인', btnTextColor: black, buttonColor: white, btnTextSize: 20.0, height: 50.0, width: 250),
-          //     ],
-          //   ),
-          // ),
         ),
       ),
     );
   }
 }
-/*
-Live chat
-
-
-*/
