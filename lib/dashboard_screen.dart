@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_login/theme.dart';
 import 'package:flutter_login/widgets.dart';
-import 'transition_route_observer.dart';
-import 'widgets/fade_in.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 import 'constants.dart';
+import 'transition_route_observer.dart';
 import 'widgets/animated_numeric_text.dart';
+import 'widgets/fade_in.dart';
 import 'widgets/round_button.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -59,19 +61,40 @@ class _DashboardScreenState extends State<DashboardScreen>
     _loadingController.dispose();
     super.dispose();
   }
-
+void _onBasicAlertPressed(context) {
+        Alert(
+                context: context,
+                title: "개발중!",
+                buttons: [
+                  DialogButton(
+                    child: Text(
+                      "확인",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    color: Colors.black,
+                    onPressed: () => Navigator.pop(context),
+                    width: 120,
+                  )
+                ],
+                desc: "현재 자람앱 기능 구현 개발 중에 있습니다.")
+            .show();
+      }
   @override
   void didPushAfterTransition() => _loadingController.forward();
 
   AppBar _buildAppBar(ThemeData theme) {
     final menuBtn = IconButton(
-      color: theme.accentColor,
+      color: Colors.black,
       icon: const Icon(FontAwesomeIcons.bars),
-      onPressed: () {},
+      onPressed: () {
+        setState(() {
+          _onBasicAlertPressed(context);
+        });
+      },
     );
     final signOutBtn = IconButton(
       icon: const Icon(FontAwesomeIcons.signOutAlt),
-      color: theme.accentColor,
+      color: Colors.black,
       onPressed: () => _goToLogin(context),
     );
     final title = Center(
@@ -83,7 +106,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             child: Hero(
               tag: Constants.logoTag,
               child: Image.asset(
-                'assets/images/ecorp.png',
+                'assets/images/Jaram.png',
                 filterQuality: FilterQuality.high,
                 height: 30,
               ),
@@ -128,8 +151,6 @@ class _DashboardScreenState extends State<DashboardScreen>
   Widget _buildHeader(ThemeData theme) {
     final primaryColor =
         Colors.white;
-    final accentColor =
-        Colors.white;
     final linearGradient = LinearGradient(colors: [
       primaryColor,
       primaryColor,
@@ -145,11 +166,20 @@ class _DashboardScreenState extends State<DashboardScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(
+              
+              '회계의 생명지수',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 40.0,
+                fontWeight: FontWeight.bold
+              )
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  '\$',
+                Text( // money state text
+                  '\₩',
                   style: theme.textTheme.display2.copyWith(
                     fontWeight: FontWeight.w300,
                     color: Colors.white,
@@ -163,6 +193,13 @@ class _DashboardScreenState extends State<DashboardScreen>
                   controller: _loadingController,
                   style: theme.textTheme.display2.copyWith(
                     foreground: Paint()..shader = linearGradient,
+                  ),
+                ),
+                Text( // money state text
+                  '\ 원',
+                  style: theme.textTheme.display2.copyWith(
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -202,62 +239,67 @@ class _DashboardScreenState extends State<DashboardScreen>
       // crossAxisSpacing: 5,
       crossAxisCount: 3,
       children: [
-        _buildButton(
-          icon: Icon(FontAwesomeIcons.user),
-          label: '프로필',
-          interval: Interval(0, aniInterval),
-        ),
-        _buildButton(
-          icon: Container(
+        // _buildButton(
+        //   icon: Icon(FontAwesomeIcons.user),
+        //   label: '프로필',
+        //   interval: Interval(0, aniInterval),
+        // ),
+        // _buildButton(
+        //   icon: Container(
             
-            // fix icon is not centered like others for some reasons
-            padding: const EdgeInsets.only(left: 16.0),
-            alignment: Alignment.centerLeft,
-            child: Icon(
+        //     // fix icon is not centered like others for some reasons
+        //     padding: const EdgeInsets.only(left: 16.0),
+        //     alignment: Alignment.centerLeft,
+        //     child: Icon(
               
-              FontAwesomeIcons.moneyBillAlt,
-              size: 20,
-              color: Colors.white,
-            ),
-          ),
-          label: '회비 관리',
-          interval: Interval(step, aniInterval + step),
+        //       FontAwesomeIcons.moneyBillAlt,
+        //       size: 20,
+        //       color: Colors.black,
+        //     ),
+        //   ),
+        //   label: '회비 관리',
+        //   interval: Interval(step, aniInterval + step),
+        // ),
+        _buildButton(
+          icon: Icon(FontAwesomeIcons.dollarSign),
+          label: '가계부',
+          interval: Interval(step * 2, aniInterval + step * 2),
         ),
         _buildButton(
           icon: Icon(FontAwesomeIcons.handHoldingUsd),
-          label: '지출',
-          interval: Interval(step * 2, aniInterval + step * 2),
-        ),
-        _buildButton(
-          icon: Icon(FontAwesomeIcons.chartLine),
-          label: '보고서',
+          label: '회비 관리',
           interval: Interval(0, aniInterval),
         ),
         _buildButton(
-          icon: Icon(Icons.vpn_key),
-          label: '회원 등록',
-          interval: Interval(step, aniInterval + step),
-        ),
-        _buildButton(
-          icon: Icon(FontAwesomeIcons.history),
-          label: '기록',
-          interval: Interval(step * 2, aniInterval + step * 2),
-        ),
-        _buildButton(
-          icon: Icon(FontAwesomeIcons.ellipsisH),
-          label: '대외',
+          icon: Icon(FontAwesomeIcons.book),
+          label: '블랙리스트',
           interval: Interval(0, aniInterval),
         ),
-        _buildButton(
-          icon: Icon(FontAwesomeIcons.search, size: 20),
-          label: '회원 검색',
-          interval: Interval(step, aniInterval + step),
-        ),
-        _buildButton(
-          icon: Icon(FontAwesomeIcons.slidersH, size: 20),
-          label: '설정',
-          interval: Interval(step * 2, aniInterval + step * 2),
-        ),
+        // _buildButton(
+        //   icon: Icon(Icons.vpn_key),
+        //   label: '회원 등록',
+        //   interval: Interval(step, aniInterval + step),
+        // ),
+        // _buildButton(
+        //   icon: Icon(FontAwesomeIcons.history),
+        //   label: '기록',
+        //   interval: Interval(step * 2, aniInterval + step * 2),
+        // ),
+        // _buildButton(
+        //   icon: Icon(FontAwesomeIcons.ellipsisH),
+        //   label: '대외',
+        //   interval: Interval(0, aniInterval),
+        // ),
+        // _buildButton(
+        //   icon: Icon(FontAwesomeIcons.search, size: 20),
+        //   label: '회원 검색',
+        //   interval: Interval(step, aniInterval + step),
+        // ),
+        // _buildButton(
+        //   icon: Icon(FontAwesomeIcons.slidersH, size: 20),
+        //   label: '설정',
+        //   interval: Interval(step * 2, aniInterval + step * 2),
+        // ),
       ],
     );
   }
@@ -293,11 +335,10 @@ class _DashboardScreenState extends State<DashboardScreen>
         child: Scaffold(
           appBar: _buildAppBar(theme),
           body: Container(
-            
             width: double.infinity,
             height: double.infinity,
             //color: theme.primaryColor.withOpacity(.1),
-            color: Colors.white,
+            color: Colors.black,
             child: Stack(
               children: <Widget>[
                 Column(
@@ -316,13 +357,11 @@ class _DashboardScreenState extends State<DashboardScreen>
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             tileMode: TileMode.clamp,
-                            colors: <Color>[
-                              Colors.deepPurpleAccent.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              // Colors.red,
-                              // Colors.yellow,
+                            colors: <Color>[ // all icons background color can be rainbow color
+                              Colors.white,
+                              Colors.white,
+                              Colors.white,
+                              Colors.white,
                             ],
                           ).createShader(bounds);
                         },
