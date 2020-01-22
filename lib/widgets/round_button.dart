@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart';
 class RoundButton extends StatefulWidget {
   RoundButton({
     Key key,
@@ -57,12 +57,29 @@ class _RoundButtonState extends State<RoundButton>
     super.dispose();
     _pressController.dispose();
   }
-
+    void _onBasicAlertPressed(context) {
+        Alert(
+                context: context,
+                title: "개발중!",
+                buttons: [
+                  DialogButton(
+                    child: Text(
+                      "확인",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    color: Colors.black,
+                    onPressed: () => Navigator.pop(context),
+                    width: 120,
+                  )
+                ],
+                desc: "현재 자람앱 기능 구현 개발 중에 있습니다.")
+            .show();
+      }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor =
-        Colors.black;
+        Colors.white;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -88,17 +105,23 @@ class _RoundButtonState extends State<RoundButton>
                         _pressController.reverse();
                       });
                       widget.onPressed();
+                      setState(() {
+                        _onBasicAlertPressed(context);
+                      });
                     },
-                    foregroundColor: Colors.white,
+                    foregroundColor: Colors.black,
                   ),
                 ),
               ),
             ),
             SizedBox(height: 10),
-            Text(
+            Text( // icons name text
               widget.label,
               style:
-                  theme.textTheme.caption.copyWith(color: theme.primaryColor),
+                TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+                ),
               textAlign: TextAlign.center,
             ),
           ],
