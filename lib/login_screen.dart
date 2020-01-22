@@ -130,7 +130,7 @@ class LoginScreen extends StatelessWidget {
           elevation: 9.0,
           highlightElevation: 6.0,
           shape: ContinuousRectangleBorder(
-            borderRadius: BorderRadius.circular(1000),
+            borderRadius: BorderRadius.circular(100),
           ),
           // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           // shape: CircleBorder(side: BorderSide(color: Colors.green)),
