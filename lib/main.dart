@@ -1,9 +1,9 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'dashboard_screen.dart';
 import 'login_screen.dart';
 import 'transition_route_observer.dart';
-import 'package:http/http.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
           display2: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 45.0,
-            // fontWeight: FontWeight.w400,
-            color: Colors.orange,
+            fontWeight: FontWeight.w400,
+            color: Colors.black,
           ),
           button: TextStyle(
             // OpenSans is similar to NotoSans but the uppercases look a bit better IMO
@@ -61,7 +61,6 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
         DashboardScreen.routeName: (context) => DashboardScreen(),
-      },
-    );
+      },);
   }
 }
