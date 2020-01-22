@@ -30,6 +30,9 @@ dependencies:
   flushbar: ^1.9.1
   # flutter_test from sdk depends on quiver 2.0.5
   quiver: ^2.0.5
+  path_provider: ^1.5.1
+  ini: ^2.0.1
+  rflutter_alert: ^1.0.3
 
 dev_dependencies:
   flutter_test:
